@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AppserverIo\Logger\Handlers\ErrorLogHandler
+ * AppserverIo\Logger\Handlers\HandlerInterface
  *
  * NOTICE OF LICENSE
  *
@@ -23,11 +23,11 @@
 
 namespace AppserverIo\Logger\Handlers;
 
-use Psr\Log\LogLevel;
 use AppserverIo\Logger\LogMessageInterface;
+use AppserverIo\Logger\Formatters\FormatterInterface;
 
 /**
- * Logger implementation that uses the PHP error_log() function.
+ * Interface for all handlers.
  *
  * @category   Library
  * @package    Logger
@@ -38,8 +38,24 @@ use AppserverIo\Logger\LogMessageInterface;
  * @link       http://github.com/appserver-io/logger
  * @link       http://www.appserver.io
  */
-class ErrorLogHandler extends DummyHandler
+interface HandlerInterface
 {
+
+    /**
+     * Sets the formatter for this handler.
+     *
+     * @param \AppserverIo\Logger\Formatters\FormatterInterface $formatter The formatter instance
+     *
+     * @return void
+     */
+    public function setFormatter(FormatterInterface $formatter);
+
+    /**
+     * Returns the formatter for this handler.
+     *
+     * @return \AppserverIo\Logger\Formatters\FormatterInterface The formatter instance
+     */
+    public function getFormatter();
 
     /**
      * Handles the log message.
@@ -48,10 +64,5 @@ class ErrorLogHandler extends DummyHandler
      *
      * @return void
      */
-    public function handle(LogMessageInterface $logMessage)
-    {
-        if ($this->shouldLog($logMessage->getLevel())) { // check the log level
-            error_log($this->getFormatter()->format($logMessage));
-        }
-    }
+    public function handle(LogMessageInterface $logMessage);
 }

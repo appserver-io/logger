@@ -24,6 +24,7 @@ namespace AppserverIo\Logger;
 
 use Psr\Log\LogLevel;
 use Psr\Log\LoggerInterface;
+use AppserverIo\Logger\Handlers\HandlerInterface;
 
 /**
  * Thread-Safe and PSR-3 compatible logger implementation.
@@ -71,11 +72,11 @@ class Logger extends \Worker implements LoggerInterface
     /**
      * Adds the passed handler.
      *
-     * @param object $handler The handler to be added
+     * @param \AppserverIo\Logger\Handler\HandlerInterface $handler The handler to be added
      *
      * @return void
      */
-    public function addHandler($handler)
+    public function addHandler(HandlerInterface $handler)
     {
         $this->handlers[] = $handler;
     }
@@ -272,7 +273,7 @@ class Logger extends \Worker implements LoggerInterface
 
         // let the handler log the message
         foreach ($this->getHandlers() as $handler) {
-            $handler->log($logMessage->getLevel(), $logMessage->getMessage(), $logMessage->getContext());
+            $handler->handle($logMessage);
         }
 
         // remove the message from the stack to free memory

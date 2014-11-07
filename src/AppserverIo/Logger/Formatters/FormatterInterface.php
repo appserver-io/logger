@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AppserverIo\Logger\Handlers\ErrorLogHandler
+ * AppserverIo\Logger\Formatters\FormatterInterface
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  *
  * @category   Library
  * @package    Logger
- * @subpackage Handlers
+ * @subpackage Formatters
  * @author     Tim Wagner <tw@techdivision.com>
  * @copyright  2014 TechDivision GmbH <info@techdivision.com>
  * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
@@ -21,37 +21,31 @@
  * @link       http://www.appserver.io
  */
 
-namespace AppserverIo\Logger\Handlers;
+namespace AppserverIo\Logger\Formatters;
 
-use Psr\Log\LogLevel;
 use AppserverIo\Logger\LogMessageInterface;
 
 /**
- * Logger implementation that uses the PHP error_log() function.
+ * Interface for all formatters.
  *
  * @category   Library
  * @package    Logger
- * @subpackage Handlers
+ * @subpackage Formatters
  * @author     Tim Wagner <tw@techdivision.com>
  * @copyright  2014 TechDivision GmbH <info@techdivision.com>
  * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link       http://github.com/appserver-io/logger
  * @link       http://www.appserver.io
  */
-class ErrorLogHandler extends DummyHandler
+interface FormatterInterface
 {
 
     /**
-     * Handles the log message.
+     * Formats and returns a string representation of the passed log message.
      *
-     * @param \AppserverIo\Logger\LogMessageInterface $logMessage The message to be handled
+     * @param \AppserverIo\Logger\Formatters\LogMessageInterface $logMessage The log message we want to format
      *
-     * @return void
+     * @return string The formatted string representation for the log messsage
      */
-    public function handle(LogMessageInterface $logMessage)
-    {
-        if ($this->shouldLog($logMessage->getLevel())) { // check the log level
-            error_log($this->getFormatter()->format($logMessage));
-        }
-    }
+    public function format(LogMessageInterface $logMessage);
 }

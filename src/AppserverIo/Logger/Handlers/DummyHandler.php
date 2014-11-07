@@ -24,8 +24,10 @@
 namespace AppserverIo\Logger\Handlers;
 
 use Psr\Log\LogLevel;
-use Psr\Log\LoggerInterface;
 use AppserverIo\Logger\LoggerUtils;
+use AppserverIo\Logger\LogMessageInterface;
+use AppserverIo\Logger\Formatters\FormatterInterface;
+use AppserverIo\Logger\Formatters\StandardFormatter;
 
 /**
  * A dummy logger implementation.
@@ -39,7 +41,7 @@ use AppserverIo\Logger\LoggerUtils;
  * @link       http://github.com/appserver-io/logger
  * @link       http://www.appserver.io
  */
-class DummyHandler implements LoggerInterface
+class DummyHandler implements HandlerInterface
 {
 
     /**
@@ -57,6 +59,13 @@ class DummyHandler implements LoggerInterface
     protected $logLevels;
 
     /**
+     * The formatter instance.
+     *
+     * @var \AppserverIo\Logger\Formatters\FormatterInterface
+     */
+    protected $formatter;
+
+    /**
      * Initializes the handler instance with channel name and log level.
      *
      * @param integer $logLevel The log level we want to use
@@ -64,138 +73,44 @@ class DummyHandler implements LoggerInterface
     public function __construct($logLevel = LogLevel::INFO)
     {
 
-        // initialize the available log levels
+        // initialize the available log levels and formatter
         $this->logLevels = LoggerUtils::$logLevels;
+        $this->formatter = new StandardFormatter();
 
         // set the actual log level
         $this->logLevel = $logLevel;
     }
 
     /**
-     * System is unusable.
+     * Sets the formatter for this handler.
      *
-     * @param string $message The message to log
-     * @param array  $context The context for log
+     * @param \AppserverIo\Logger\Formatters\FormatterInterface $formatter The formatter instance
      *
-     * @return null
+     * @return void
      */
-    public function emergency($message, array $context = array())
+    public function setFormatter(FormatterInterface $formatter)
     {
-        $this->log($message, $context);
+        $this->formatter = $formatter;
     }
 
     /**
-     * Action must be taken immediately.
+     * Returns the formatter for this handler.
      *
-     * Example: Entire website down, database unavailable, etc. This should
-     * trigger the SMS alerts and wake you up.
-     *
-     * @param string $message The message to log
-     * @param array  $context The context for log
-     *
-     * @return null
+     * @return \AppserverIo\Logger\Formatters\FormatterInterface The formatter instance
      */
-    public function alert($message, array $context = array())
+    public function getFormatter()
     {
-        $this->log($message, $context);
+        return $this->formatter;
     }
 
     /**
-     * Critical conditions.
+     * Handles the log message.
      *
-     * Example: Application component unavailable, unexpected exception.
+     * @param \AppserverIo\Logger\LogMessageInterface $logMessage The message to be handled
      *
-     * @param string $message The message to log
-     * @param array  $context The context for log
-     *
-     * @return null
+     * @return void
      */
-    public function critical($message, array $context = array())
-    {
-        $this->log($message, $context);
-    }
-
-    /**
-     * Runtime errors that do not require immediate action but should typically
-     * be logged and monitored.
-     *
-     * @param string $message The message to log
-     * @param array  $context The context for log
-     *
-     * @return null
-     */
-    public function error($message, array $context = array())
-    {
-        $this->log($message, $context);
-    }
-
-    /**
-     * Exceptional occurrences that are not errors.
-     *
-     * Example: Use of deprecated APIs, poor use of an API, undesirable things
-     * that are not necessarily wrong.
-     *
-     * @param string $message The message to log
-     * @param array  $context The context for log
-     *
-     * @return null
-     */
-    public function warning($message, array $context = array())
-    {
-        $this->log($message, $context);
-    }
-
-    /**
-     * Normal but significant events.
-     *
-     * @param string $message The message to log
-     * @param array  $context The context for log
-     *
-     * @return null
-     */
-    public function notice($message, array $context = array())
-    {
-        $this->log($message, $context);
-    }
-
-    /**
-     * Interesting events.
-     *
-     * Example: User logs in, SQL logs.
-     *
-     * @param string $message The message to log
-     * @param array  $context The context for log
-     *
-     * @return null
-     */
-    public function info($message, array $context = array())
-    {
-        $this->log($message, $context);
-    }
-
-    /**
-     * Detailed debug information.
-     *
-     * @param string $message The message to log
-     * @param array  $context The context for log
-     *
-     * @return null
-     */
-    public function debug($message, array $context = array())
-    {
-        $this->log($message, $context);
-    }
-
-    /**
-     * Logs with an arbitrary level.
-     *
-     * @param mixed  $level   The log level
-     * @param string $message The message to log
-     * @param array  $context The context for log
-     *
-     * @return null
-     */
-    public function log($level, $message, array $context = array())
+    public function handle(LogMessageInterface $logMessage)
     {
         // this is a dummy logger
     }
@@ -218,7 +133,7 @@ class DummyHandler implements LoggerInterface
      *
      * @return boolean TRUE if the handler should log
      */
-    public function shouldLog($level)
+    protected function shouldLog($level)
     {
         return $this->logLevels[$level] >= $this->logLevels[$this->getLogLevel()];
     }
