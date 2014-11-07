@@ -24,9 +24,10 @@
 namespace AppserverIo\Logger\Handlers;
 
 use Psr\Log\LogLevel;
+use AppserverIo\Logger\LogMessageInterface;
 
 /**
- * Logger implementation that uses the PHP 'error_log' function to log to a custom file.
+ * Logger implementation that uses the PHP error_log() function to log to a custom file.
  *
  * @category   Library
  * @package    Logger
@@ -74,25 +75,16 @@ class CustomFileHandler extends DummyHandler
     }
 
     /**
-     * Logs with an arbitrary level.
+     * Handles the log message.
      *
-     * @param mixed  $level   The log level
-     * @param string $message The message to log
-     * @param array  $context The context for log
+     * @param \AppserverIo\Logger\LogMessageInterface $logMessage The message to be handled
      *
-     * @return null
+     * @return void
      */
-    public function log($level, $message, array $context = array())
+    public function handle(LogMessageInterface $logMessage)
     {
-
-        // check the log level
-        if ($this->shouldLog($level)) {
-
-            // prepare the log message
-            $logMessage = sprintf('[%s] - %s (%s): %s %s' . PHP_EOL, date('Y-m-d H:i:s'), gethostname(), $level, $message, json_encode($context));
-
-            // write the log message
-            error_log($logMessage, 3, $this->getLogFile());
+        if ($this->shouldLog($logMessage->getLevel())) { // check the log level
+            error_log($this->getFormatter()->format($logMessage) . PHP_EOL, 3, $this->getLogFile());
         }
     }
 }
