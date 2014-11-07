@@ -49,9 +49,6 @@ class Logger extends \Worker implements LoggerInterface
     public function __construct($channelName, array $handlers = array(), array $processors = array())
     {
 
-        // initialize the members
-        $this->run = true;
-
         // initialize the passe values
         $this->channelName = $channelName;
 
