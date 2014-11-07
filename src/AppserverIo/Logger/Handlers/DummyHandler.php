@@ -42,14 +42,6 @@ use AppserverIo\Logger\LoggerUtils;
 class DummyHandler implements LoggerInterface
 {
 
-
-    /**
-     * The channel name we use for logging.
-     *
-     * @var string
-     */
-    protected $channelName;
-
     /**
      * The log level we want to use.
      *
@@ -58,14 +50,24 @@ class DummyHandler implements LoggerInterface
     protected $logLevel;
 
     /**
+     * The available log levels.
+     *
+     * @var array
+     */
+    protected $logLevels;
+
+    /**
      * Initializes the handler instance with channel name and log level.
      *
-     * @param string  $channelName The channel name
-     * @param integer $logLevel    The log level we want to use
+     * @param integer $logLevel The log level we want to use
      */
-    public function __construct($channelName, $logLevel = LogLevel::INFO)
+    public function __construct($logLevel = LogLevel::INFO)
     {
-        $this->channelName = $channelName;
+
+        // initialize the available log levels
+        $this->logLevels = LoggerUtils::$logLevels;
+
+        // set the actual log level
         $this->logLevel = $logLevel;
     }
 
@@ -203,7 +205,7 @@ class DummyHandler implements LoggerInterface
      *
      * @return integer The log level
      */
-    public function getLogLevel()
+    protected function getLogLevel()
     {
         return $this->logLevel;
     }
@@ -218,6 +220,6 @@ class DummyHandler implements LoggerInterface
      */
     public function shouldLog($level)
     {
-        return LoggerUtils::$logLevels[$level] >= LoggerUtils::$logLevels[$this->getLogLevel()];
+        return $this->logLevels[$level] >= $this->logLevels[$this->getLogLevel()];
     }
 }

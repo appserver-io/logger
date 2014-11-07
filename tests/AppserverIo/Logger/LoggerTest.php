@@ -22,6 +22,9 @@
 
 namespace AppserverIo\Logger;
 
+use Psr\Log\LogLevel;
+use AppserverIo\Logger\Handlers\DummyHandler;
+
 /**
  * This is test implementation for logger implementation.
  *
@@ -68,5 +71,33 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     public function testGetChannelName()
     {
         $this->assertSame(LoggerTest::CHANNEL_NAME, $this->logger->getChannelName());
+    }
+
+    /**
+     * Test the log() method.
+     *
+     * @return void
+     */
+    public function testLogMethod()
+    {
+        $logger = new Logger(LoggerTest::CHANNEL_NAME);
+        $logger->addHandler(new DummyHandler());
+        $logger->start();
+        $logger->log(LogLevel::INFO, "testmessage", array(new \stdClass()));
+        $logger->shutdown();
+    }
+
+    /**
+     * Test the info() method.
+     *
+     * @return void
+     */
+    public function testInfoMethod()
+    {
+        $logger = new Logger(LoggerTest::CHANNEL_NAME);
+        $logger->addHandler(new DummyHandler());
+        $logger->start();
+        $logger->info("testmessage", array(new \stdClass()));
+        $logger->shutdown();
     }
 }

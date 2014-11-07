@@ -36,7 +36,7 @@ use Psr\Log\LoggerInterface;
  * @link      http://github.com/appserver-io/logger
  * @link      http://www.appserver.io
  */
-class Logger extends \Thread implements LoggerInterface
+class Logger extends \Worker implements LoggerInterface
 {
 
     /**
@@ -49,14 +49,67 @@ class Logger extends \Thread implements LoggerInterface
     public function __construct($channelName, array $handlers = array(), array $processors = array())
     {
 
-        // initialize the members
-        $this->run = true;
-        $this->ready = false;
-
         // initialize the passe values
         $this->channelName = $channelName;
-        $this->handlers = $handlers;
-        $this->processors = $processors;
+
+        // initialize the stackables
+        $this->stack = new \Stackable();
+        $this->handlers = new \Stackable();
+        $this->processors = new \Stackable();
+
+        // add the passed handlers
+        foreach ($handlers as $handler) {
+            $this->addHandler($handler);
+        }
+
+        // add the passed processors
+        foreach ($processors as $processor) {
+            $this->addProcessor($processor);
+        }
+    }
+
+    /**
+     * Adds the passed handler.
+     *
+     * @param object $handler The handler to be added
+     *
+     * @return void
+     */
+    public function addHandler($handler)
+    {
+        $this->handlers[] = $handler;
+    }
+
+    /**
+     * Returns the registered handlers.
+     *
+     * @return \Stackable The registered handlers
+     */
+    protected function getHandlers()
+    {
+        return $this->handlers;
+    }
+
+    /**
+     * Adds the passed processor.
+     *
+     * @param object $processor The processor to be added
+     *
+     * @return void
+     */
+    public function addProcessor($processor)
+    {
+        $this->processors[] = $processor;
+    }
+
+    /**
+     * Returns the registered processors.
+     *
+     * @return \Stackable The registered processors
+     */
+    protected function getProcessors()
+    {
+        return $this->processors;
     }
 
     /**
@@ -64,7 +117,7 @@ class Logger extends \Thread implements LoggerInterface
      *
      * @return string The channel name
      */
-    public function getChannelName()
+    protected function getChannelName()
     {
         return $this->channelName;
     }
@@ -196,47 +249,33 @@ class Logger extends \Thread implements LoggerInterface
     public function log($level, $message, array $context = array())
     {
 
-        $this->synchronized(function ($self, $lvl, $msg, $ctx) {
+        // create a new log message
+        $logMessage = new LogMessage($id = uniqid(), $level, $message, $context);
 
-            // prepare log data
-            $self->self->level = $lvl;
-            $self->message = $msg;
-            $self->context = $ctx;
+        // queue the log message
+        $this->stack[$id] = $logMessage;
 
-            // send the notification that we're ready
-            $self->notify();
-
-        }, $this, $level, $message, $context);
+        // put it on the stack
+        $this->stack($logMessage);
     }
 
     /**
-     * Executes the logging functionality.
+     * Targe for the delegate method of the log message that processes
+     * the log message asynchronously.
+     *
+     * @param \AppserverIo\Logger\LogMessageInterface $logMessage The message to be processed
      *
      * @return void
      */
-    public function run()
+    public function process(LogMessageInterface $logMessage)
     {
 
-        while ($this->run) { // run forever and wait for log messages
-
-            $this->synchronized(function ($self) {
-
-                // wait until we receive a new log notification
-                $self->wait();
-
-                // run over all handlers and log the message
-                foreach ($self->handlers as $handler) {
-
-                    // prepare log data
-                    $level = $self->level;
-                    $message = $self->message;
-                    $context = $self->context;
-
-                    // let the handler log the message
-                    $handler->log($level, $message, $context);
-                }
-
-            }, $this);
+        // let the handler log the message
+        foreach ($this->getHandlers() as $handler) {
+            $handler->log($logMessage->getLevel(), $logMessage->getMessage(), $logMessage->getContext());
         }
+
+        // remove the message from the stack to free memory
+        unset($this->stack[$logMessage->getId()]);
     }
 }
