@@ -1,0 +1,34 @@
+{
+	"name" : "appserver-io/logger",
+	"description" : "Thread-Safe and PSR-3 compatible logger implementation.",
+	"homepage" : "https://github.com/appserver-io/logger",
+	"license" : "OSL-3.0",
+	"authors" : [{
+			"name" : "Tim Wagner",
+			"email" : "tw@techdivision.com",
+			"homepage" : "http://www.techdivision.com",
+			"role" : "Developer"
+		}
+	],
+	"require" : {
+		"php" : ">=5.4.0",
+        "psr/log" : "*"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "4.1.*",
+		"appserver-io/build" : "0.1.*"
+	},
+	"autoload" : {
+		"psr-0" : {
+			"AppserverIo\\Logger" : [
+				"src/",
+				"tests/"
+			]
+		}
+	},
+	"config" : {
+		"github-oauth" : {
+			"github.com" : "604a3b5943228e434a5b52c2ba3cf72286d30db9"
+		}
+	}
+}
