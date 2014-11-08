@@ -66,4 +66,35 @@ interface LogMessageInterface
      * @link https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#13-context
      */
     public function getContext();
+
+    /**
+     * Sets the context we want to log.
+     *
+     * @param array $context The log context
+     *
+     * @return void
+     * @link https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#13-context
+     */
+    public function setContext(array $context);
+
+    /**
+     * Merges the values of the passed array into the context.
+     *
+     * @param array $toMerge The array with the data to merge
+     *
+     * @return void
+     * @link https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#13-context
+     */
+    public function mergeIntoContext(array $toMerge);
+
+    /**
+     * Appends the passed key/value pair to the context.
+     *
+     * @param string $key   The key to merge the value with
+     * @param mixed  $value The value to merge
+     *
+     * @return void
+     * @link https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md#13-context
+     */
+    public function appendToContext($key, $value);
 }

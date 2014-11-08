@@ -7,6 +7,7 @@
 ## Features
 
 * Add RotatedFileHandler functionality
+* Add Processor functionality, LogstashHandler and JsonFormatter
 
 # Version 0.1.1
 
