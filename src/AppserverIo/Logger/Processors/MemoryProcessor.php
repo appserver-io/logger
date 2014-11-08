@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AppserverIo\Logger\Handlers\DummyHandler
+ * AppserverIo\Logger\Processors\MemoryProcessor
  *
  * NOTICE OF LICENSE
  *
@@ -13,7 +13,7 @@
  *
  * @category   Library
  * @package    Logger
- * @subpackage Handlers
+ * @subpackage Processors
  * @author     Tim Wagner <tw@techdivision.com>
  * @copyright  2014 TechDivision GmbH <info@techdivision.com>
  * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
@@ -21,36 +21,42 @@
  * @link       http://www.appserver.io
  */
 
-namespace AppserverIo\Logger\Handlers;
+namespace AppserverIo\Logger\Processors;
 
 use AppserverIo\Logger\LogMessageInterface;
 
 /**
- * A dummy logger implementation.
+ * Processor that adds the actual memory usage to the message context.
  *
  * @category   Library
  * @package    Logger
- * @subpackage Handlers
+ * @subpackage Processors
  * @author     Tim Wagner <tw@techdivision.com>
  * @copyright  2014 TechDivision GmbH <info@techdivision.com>
  * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link       http://github.com/appserver-io/logger
  * @link       http://www.appserver.io
  */
-class ConsoleHandler extends DummyHandler
+class MemoryProcessor implements ProcessorInterface
 {
 
     /**
-     * Handles the log message.
+     * Adds the memory to the message context.
      *
-     * @param \AppserverIo\Logger\LogMessageInterface $logMessage The message to be handled
-     *
-     * @return void
+     * @var string
      */
-    public function handle(LogMessageInterface $logMessage)
+    const CONTEXT_KEY = 'memory';
+
+    /**
+     * Adds the actual memory usage to the log message context.
+     *
+     * @param \AppserverIo\Logger\Formatters\LogMessageInterface $logMessage The log message we want to add the memory usage
+     *
+     * @return string The processed log messsage
+     * @see \AppserverIo\Logger\Processors\ProcessorInterface::process()
+     */
+    public function process(LogMessageInterface $logMessage)
     {
-        if ($this->shouldLog($logMessage->getLevel())) { // check the log level
-            print $this->getFormatter()->format($logMessage) . PHP_EOL;
-        }
+        $logMessage->appendToContext(MemoryProcessor::CONTEXT_KEY, memory_get_usage());
     }
 }

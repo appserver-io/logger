@@ -25,6 +25,7 @@ namespace AppserverIo\Logger;
 use Psr\Log\LogLevel;
 use Psr\Log\LoggerInterface;
 use AppserverIo\Logger\Handlers\HandlerInterface;
+use AppserverIo\Logger\Processors\ProcessorInterface;
 
 /**
  * Thread-Safe and PSR-3 compatible logger implementation.
@@ -39,6 +40,27 @@ use AppserverIo\Logger\Handlers\HandlerInterface;
  */
 class Logger implements LoggerInterface
 {
+
+    /**
+     * The channel name we log to.
+     *
+     * @var string
+     */
+    protected $channelName;
+
+    /**
+     * Array with the handlers.
+     *
+     * @var array
+     */
+    protected $handlers;
+
+    /**
+     * Array with the processors.
+     *
+     * @var array
+     */
+    protected $processors;
 
     /**
      * Initializes the logger instance with the log level.
@@ -93,11 +115,11 @@ class Logger implements LoggerInterface
     /**
      * Adds the passed processor.
      *
-     * @param object $processor The processor to be added
+     * @param \AppserverIo\Logger\Processors\ProcessorInterface $processor The processor to be added
      *
      * @return void
      */
-    public function addProcessor($processor)
+    public function addProcessor(ProcessorInterface $processor)
     {
         $this->processors[] = $processor;
     }
@@ -261,7 +283,14 @@ class Logger implements LoggerInterface
      */
     public function process(LogMessageInterface $logMessage)
     {
-        foreach ($this->getHandlers() as $handler) { // let the handler log the message
+
+        // let the processors process the message
+        foreach ($this->getProcessors() as $processor) {
+            $processor->process($logMessage);
+        }
+
+        // let the handler log the message
+        foreach ($this->getHandlers() as $handler) {
             $handler->handle($logMessage);
         }
     }
