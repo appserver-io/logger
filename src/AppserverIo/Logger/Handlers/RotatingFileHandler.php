@@ -224,11 +224,11 @@ class RotatingFileHandler extends CustomFileHandler
     /**
      * Sets the next rotation date.
      *
-     * @param \DateTimeInterface $nextRotationDate The next rotation date
+     * @param \DateTime $nextRotationDate The next rotation date
      *
      * @return void
      */
-    public function setNextRotationDate(\DateTimeInterface $nextRotationDate)
+    public function setNextRotationDate(\DateTime $nextRotationDate)
     {
         $this->nextRotationDate = $nextRotationDate;
     }
