@@ -51,10 +51,10 @@ class CustomFileHandler extends DummyHandler
     /**
      * Initializes the logger instance with the log level.
      *
-     * @param integer $logLevel The log level we want to use
      * @param string  $logFile  The file we want to log to
+     * @param integer $logLevel The log level we want to use
      */
-    public function __construct($logLevel = LogLevel::INFO, $logFile = null)
+    public function __construct($logFile, $logLevel = LogLevel::INFO)
     {
 
         // pass arguments to parent constructor

@@ -37,14 +37,6 @@ interface LogMessageInterface
 {
 
     /**
-     * Delegate method that delegates the logging process back to the worker.
-     *
-     * @return void
-     * @see \Stackable::run()
-     */
-    public function run();
-
-    /**
      * Returns the unique-ID of the log message.
      *
      *  @return string The unique-ID

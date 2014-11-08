@@ -33,22 +33,8 @@ namespace AppserverIo\Logger;
  * @link      http://github.com/appserver-io/logger
  * @link      http://www.appserver.io
  */
-class LogMessage extends \Stackable implements LogMessageInterface
+class LogMessage implements LogMessageInterface
 {
-
-    /**
-     * Delegate method that delegates the logging process back to the worker.
-     *
-     * @return void
-     * @see \Stackable::run()
-     * @see \AppserverIo\Logger\LogMessageInterface
-     */
-    public function run()
-    {
-        if ($this->worker) {
-            $this->worker->process($this);
-        }
-    }
 
     /**
      * Initializes the message with the necessary information.
