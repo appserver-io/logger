@@ -6,7 +6,7 @@
 
 ## Features
 
-* Add RotetedFileHandler functionality
+* Add RotatedFileHandler functionality
 
 # Version 0.1.1
 
