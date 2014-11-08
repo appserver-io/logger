@@ -1,3 +1,13 @@
+# Version 0.1.2
+
+## Bugfixes
+
+* None
+
+## Features
+
+* Add RotetedFileHandler functionality
+
 # Version 0.1.1
 
 ## Bugfixes

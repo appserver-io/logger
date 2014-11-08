@@ -37,7 +37,7 @@ use AppserverIo\Logger\Handlers\HandlerInterface;
  * @link      http://github.com/appserver-io/logger
  * @link      http://www.appserver.io
  */
-class Logger extends \Worker implements LoggerInterface
+class Logger implements LoggerInterface
 {
 
     /**
@@ -54,9 +54,8 @@ class Logger extends \Worker implements LoggerInterface
         $this->channelName = $channelName;
 
         // initialize the stackables
-        $this->stack = new \Stackable();
-        $this->handlers = new \Stackable();
-        $this->processors = new \Stackable();
+        $this->handlers = array();
+        $this->processors = array();
 
         // add the passed handlers
         foreach ($handlers as $handler) {
@@ -249,15 +248,7 @@ class Logger extends \Worker implements LoggerInterface
      */
     public function log($level, $message, array $context = array())
     {
-
-        // create a new log message
-        $logMessage = new LogMessage($id = uniqid(), $level, $message, $context);
-
-        // queue the log message
-        $this->stack[$id] = $logMessage;
-
-        // put it on the stack
-        $this->stack($logMessage);
+        $this->process(new LogMessage(uniqid(), $level, $message, $context));
     }
 
     /**
@@ -270,13 +261,8 @@ class Logger extends \Worker implements LoggerInterface
      */
     public function process(LogMessageInterface $logMessage)
     {
-
-        // let the handler log the message
-        foreach ($this->getHandlers() as $handler) {
+        foreach ($this->getHandlers() as $handler) { // let the handler log the message
             $handler->handle($logMessage);
         }
-
-        // remove the message from the stack to free memory
-        unset($this->stack[$logMessage->getId()]);
     }
 }

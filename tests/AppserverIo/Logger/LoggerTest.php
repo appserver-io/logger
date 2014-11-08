@@ -64,16 +64,6 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * This test checks for the correct channel name.
-     *
-     * @return void
-     */
-    public function testGetChannelName()
-    {
-        $this->assertSame(LoggerTest::CHANNEL_NAME, $this->logger->getChannelName());
-    }
-
-    /**
      * Test the log() method.
      *
      * @return void
@@ -82,9 +72,7 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $logger = new Logger(LoggerTest::CHANNEL_NAME);
         $logger->addHandler(new DummyHandler());
-        $logger->start();
         $logger->log(LogLevel::INFO, "testmessage", array(new \stdClass()));
-        $logger->shutdown();
     }
 
     /**
@@ -96,8 +84,6 @@ class LoggerTest extends \PHPUnit_Framework_TestCase
     {
         $logger = new Logger(LoggerTest::CHANNEL_NAME);
         $logger->addHandler(new DummyHandler());
-        $logger->start();
         $logger->info("testmessage", array(new \stdClass()));
-        $logger->shutdown();
     }
 }

@@ -1,0 +1,1 @@
+[2014-11-08 10:24:14] - Tims-iMac-5.local (debug): Provisioner datasource successfully initialized and executed {"file":"\/opt\/appserver\/app\/code\/vendor\/techdivision\/appserver\/src\/TechDivision\/ApplicationServer\/Server.php","line":288,"class":"TechDivision\\ApplicationServer\\Server","function":"initProvisioners"}
