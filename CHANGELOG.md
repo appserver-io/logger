@@ -1,3 +1,13 @@
+# Version 0.1.4
+
+## Bugfixes
+
+* Remove of invalid additional json_encode() function call of in JsonFormatter
+
+## Features
+
+* None
+
 # Version 0.1.3
 
 ## Bugfixes
