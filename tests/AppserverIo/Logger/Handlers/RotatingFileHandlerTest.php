@@ -146,19 +146,6 @@ class RotatingFileHandlerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test the method that returns the name for the next
-     * rotated log file.
-     *
-     * @return void
-     */
-    public function testGetRotatedFilename()
-    {
-        $this->handler = new RotatingFileHandler(__DIR__ . self::STATIC_DIR . self::TMP_FILE, LogLevel::DEBUG, 0, 10);
-        $expectedFilename =  __DIR__ . self::STATIC_DIR . str_replace('.log', '', self::TMP_FILE) . '-2014-11-08_5.log';
-        $this->assertEquals($expectedFilename, $this->handler->getRotatedFilename());
-    }
-
-    /**
      * Test for the classes "rotate" method based on a record from the future
      *
      * @return void

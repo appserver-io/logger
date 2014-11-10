@@ -39,6 +39,27 @@ class LoggerUtils
 {
 
     /**
+     * The key for the system logger.
+     *
+     * @var string
+     */
+    const SYSTEM = 'System';
+
+    /**
+     * The key for the access logger.
+     *
+     * @var string
+     */
+    const ACCESS = 'Access';
+
+    /**
+     * The key for the profile logger.
+     *
+     * @var string
+     */
+    const PROFILE = 'Profile';
+
+    /**
      * The log levels mapped to comparable integer values.
      *
      * @var array

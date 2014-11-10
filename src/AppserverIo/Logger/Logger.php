@@ -23,7 +23,6 @@
 namespace AppserverIo\Logger;
 
 use Psr\Log\LogLevel;
-use Psr\Log\LoggerInterface;
 use AppserverIo\Logger\Handlers\HandlerInterface;
 use AppserverIo\Logger\Processors\ProcessorInterface;
 
@@ -38,8 +37,15 @@ use AppserverIo\Logger\Processors\ProcessorInterface;
  * @link      http://github.com/appserver-io/logger
  * @link      http://www.appserver.io
  */
-class Logger implements LoggerInterface
+class Logger implements ThreadSafeLoggerInterface
 {
+
+    /**
+     * The thread context of the thread we're logging for.
+     *
+     * @var string
+     */
+    public static $threadContext = 'global';
 
     /**
      * The channel name we log to.
@@ -293,5 +299,18 @@ class Logger implements LoggerInterface
         foreach ($this->getHandlers() as $handler) {
             $handler->handle($logMessage);
         }
+    }
+
+    /**
+     * Appends the passed thread context.
+     *
+     * @param string $threadContext The thread context to append
+     *
+     * @return void
+     * @see \AppserverIo\Logger\ThreadSafeLoggerInterface::appendThreadContext()
+     */
+    public function appendThreadContext($threadContext)
+    {
+        Logger::$threadContext = sprintf('%s-%s', Logger::$threadContext, $threadContext);
     }
 }

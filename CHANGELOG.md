@@ -1,3 +1,14 @@
+# Version 0.1.3
+
+## Bugfixes
+
+* None
+
+## Features
+
+* Add interface ThreadSafeLoggerInterface and static Logger::$threadContext variable containing thread context
+* Add ThreadContextProcessor to add thread context as attribute name to message context
+
 # Version 0.1.2
 
 ## Bugfixes
