@@ -58,18 +58,4 @@ class JsonFormatter extends StandardFormatter
         // pass variables to parent
         parent::__construct($messageFormat, $dateFormat);
     }
-
-    /**
-     * Formats and returns a json encoded string representation of the passed
-     * log message.
-     *
-     * @param \AppserverIo\Logger\Formatters\LogMessageInterface $logMessage The log message we want to format
-     *
-     * @return string The json encoded and formatted string representation of the log messsage
-     * @see \AppserverIo\Logger\Formatters\JsonFormatter::format()
-     */
-    public function format(LogMessageInterface $logMessage)
-    {
-        return json_encode(parent::format($logMessage));
-    }
 }
