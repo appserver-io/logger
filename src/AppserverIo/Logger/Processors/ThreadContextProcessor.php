@@ -11,34 +11,27 @@
  *
  * PHP version 5
  *
- * @category   Library
- * @package    Logger
- * @subpackage Processors
- * @author     Tim Wagner <tw@techdivision.com>
- * @copyright  2014 TechDivision GmbH <info@techdivision.com>
- * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link       http://github.com/appserver-io/logger
- * @link       http://www.appserver.io
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2015 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://github.com/appserver-io/logger
+ * @link      http://www.appserver.io
  */
 
 namespace AppserverIo\Logger\Processors;
 
 use AppserverIo\Logger\Logger;
 use AppserverIo\Logger\LogMessageInterface;
-use AppserverIo\Logger\Processors\ProcessorInterface;
 
 /**
  * Logger processor that adds the thread context as name attribute. The thread context
  * will be queried from the ProfileLogger, to the log context.
  *
- * @category   Library
- * @package    Logger
- * @subpackage Processors
- * @author     Tim Wagner <tw@techdivision.com>
- * @copyright  2014 TechDivision GmbH <info@techdivision.com>
- * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link       http://github.com/appserver-io/logger
- * @link       http://www.appserver.io
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2015 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://github.com/appserver-io/logger
+ * @link      http://www.appserver.io
  */
 class ThreadContextProcessor implements ProcessorInterface
 {
@@ -53,9 +46,9 @@ class ThreadContextProcessor implements ProcessorInterface
     /**
      * Adds the thread context as name attribute to the log message context.
      *
-     * @param \AppserverIo\Logger\Formatters\LogMessageInterface $logMessage The log message we want to add the thread context name to
+     * @param \AppserverIo\Logger\LogMessageInterface $logMessage The log message we want to add the thread context name to
      *
-     * @return string The processed log messsage
+     * @return string The processed log message
      * @see \AppserverIo\Logger\Processors\ProcessorInterface::process()
      */
     public function process(LogMessageInterface $logMessage)
