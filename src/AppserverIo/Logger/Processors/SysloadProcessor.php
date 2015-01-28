@@ -11,14 +11,11 @@
  *
  * PHP version 5
  *
- * @category   Library
- * @package    Logger
- * @subpackage Processors
- * @author     Tim Wagner <tw@techdivision.com>
- * @copyright  2014 TechDivision GmbH <info@techdivision.com>
- * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link       http://github.com/appserver-io/logger
- * @link       http://www.appserver.io
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2015 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://github.com/appserver-io/logger
+ * @link      http://www.appserver.io
  */
 
 namespace AppserverIo\Logger\Processors;
@@ -28,14 +25,11 @@ use AppserverIo\Logger\LogMessageInterface;
 /**
  * Processor that adds the actual system load to the message context.
  *
- * @category   Library
- * @package    Logger
- * @subpackage Processors
- * @author     Tim Wagner <tw@techdivision.com>
- * @copyright  2014 TechDivision GmbH <info@techdivision.com>
- * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link       http://github.com/appserver-io/logger
- * @link       http://www.appserver.io
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2015 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://github.com/appserver-io/logger
+ * @link      http://www.appserver.io
  */
 class SysloadProcessor implements ProcessorInterface
 {
@@ -43,9 +37,9 @@ class SysloadProcessor implements ProcessorInterface
     /**
      * Adds the actual system load to the log message context.
      *
-     * @param \AppserverIo\Logger\Formatters\LogMessageInterface $logMessage The log message we want to add the system load
+     * @param \AppserverIo\Logger\LogMessageInterface $logMessage The log message we want to add the system load
      *
-     * @return string The processed log messsage
+     * @return string The processed log message
      * @see \AppserverIo\Logger\Processors\ProcessorInterface::process()
      */
     public function process(LogMessageInterface $logMessage)
