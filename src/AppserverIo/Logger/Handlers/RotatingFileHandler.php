@@ -11,21 +11,17 @@
  *
  * PHP version 5
  *
- * @category   Library
- * @package    Logger
- * @subpackage Handlers
- * @author     Tim Wagner <tw@techdivision.com>
- * @copyright  2014 TechDivision GmbH <info@techdivision.com>
- * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link       http://github.com/appserver-io/logger
- * @link       http://www.appserver.io
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2015 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://github.com/appserver-io/logger
+ * @link      http://www.appserver.io
  */
 
 namespace AppserverIo\Logger\Handlers;
 
 use Psr\Log\LogLevel;
 use AppserverIo\Logger\LogMessageInterface;
-use AppserverIo\Logger\Handlers\CustomFileHandler;
 
 /**
  * Handler implementation which allows for proper usage within a pthreads environment, as there
@@ -34,15 +30,11 @@ use AppserverIo\Logger\Handlers\CustomFileHandler;
  *
  * The class got also extended to support file rotation based on a maximal file size.
  *
- * @category   Library
- * @package    Logger
- * @subpackage Handlers
- * @author     Bernhard Wick <b.wick@techdivision.com>
- * @author     Tim Wagner <tw@techdivision.com>
- * @copyright  2014 TechDivision GmbH <info@techdivision.com>
- * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link       http://github.com/appserver-io/logger
- * @link       http://www.appserver.io
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2015 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://github.com/appserver-io/logger
+ * @link      http://www.appserver.io
  */
 class RotatingFileHandler extends CustomFileHandler
 {
@@ -176,7 +168,8 @@ class RotatingFileHandler extends CustomFileHandler
         }
 
         $logFiles = glob($this->getGlobPattern());
-        if ($this->maxFiles >= count($logFiles)) { // no files to remove
+        if ($this->maxFiles >= count($logFiles)) {
+            // no files to remove
             return;
         }
 

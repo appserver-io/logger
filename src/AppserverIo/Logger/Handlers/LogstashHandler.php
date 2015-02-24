@@ -11,14 +11,11 @@
  *
  * PHP version 5
  *
- * @category   Library
- * @package    Logger
- * @subpackage Handlers
- * @author     Tim Wagner <tw@techdivision.com>
- * @copyright  2014 TechDivision GmbH <info@techdivision.com>
- * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link       http://github.com/appserver-io/logger
- * @link       http://www.appserver.io
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2015 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://github.com/appserver-io/logger
+ * @link      http://www.appserver.io
  */
 
 namespace AppserverIo\Logger\Handlers;
@@ -31,14 +28,11 @@ use AppserverIo\Logger\Formatters\JsonFormatter;
  * A logstash handler implementation that sends the log message to
  * Logstash using a UDP connection.
  *
- * @category   Library
- * @package    Logger
- * @subpackage Handlers
- * @author     Tim Wagner <tw@techdivision.com>
- * @copyright  2014 TechDivision GmbH <info@techdivision.com>
- * @license    http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @link       http://github.com/appserver-io/logger
- * @link       http://www.appserver.io
+ * @author    Tim Wagner <tw@techdivision.com>
+ * @copyright 2015 TechDivision GmbH <info@techdivision.com>
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @link      http://github.com/appserver-io/logger
+ * @link      http://www.appserver.io
  */
 class LogstashHandler extends DummyHandler
 {
@@ -107,7 +101,8 @@ class LogstashHandler extends DummyHandler
      */
     public function handle(LogMessageInterface $logMessage)
     {
-        if ($this->shouldLog($logMessage->getLevel())) { // check the log level
+        if ($this->shouldLog($logMessage->getLevel())) {
+            // check the log level
 
             // the JSON encoded log message
             $jsonMessage = $this->getFormatter()->format($logMessage);

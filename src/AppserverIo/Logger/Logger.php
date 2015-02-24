@@ -11,10 +11,8 @@
  *
  * PHP version 5
  *
- * @category  Library
- * @package   Routlt
  * @author    Tim Wagner <tw@techdivision.com>
- * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @copyright 2015 TechDivision GmbH <info@techdivision.com>
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link      http://github.com/appserver-io/logger
  * @link      http://www.appserver.io
@@ -29,10 +27,8 @@ use AppserverIo\Logger\Processors\ProcessorInterface;
 /**
  * Thread-Safe and PSR-3 compatible logger implementation.
  *
- * @category  Library
- * @package   Logger
  * @author    Tim Wagner <tw@techdivision.com>
- * @copyright 2014 TechDivision GmbH <info@techdivision.com>
+ * @copyright 2015 TechDivision GmbH <info@techdivision.com>
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @link      http://github.com/appserver-io/logger
  * @link      http://www.appserver.io
@@ -99,7 +95,7 @@ class Logger implements ThreadSafeLoggerInterface
     /**
      * Adds the passed handler.
      *
-     * @param \AppserverIo\Logger\Handler\HandlerInterface $handler The handler to be added
+     * @param \AppserverIo\Logger\Handlers\HandlerInterface $handler The handler to be added
      *
      * @return void
      */
