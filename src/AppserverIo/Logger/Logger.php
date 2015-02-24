@@ -272,7 +272,7 @@ class Logger implements ThreadSafeLoggerInterface
      */
     public function log($level, $message, array $context = array())
     {
-        $this->process(new LogMessage(uniqid(), $level, $message, $context));
+        $this->process(new LogMessage(mt_rand(), $level, $message, $context));
     }
 
     /**

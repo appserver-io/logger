@@ -1,3 +1,13 @@
+# Version 1.0.1
+
+## Bugfixes
+
+* None
+
+## Features
+
+* Replace uniqid() with mt_rand() method to improve performance
+
 # Version 1.0.0
 
 ## Bugfixes
