@@ -1,27 +1,22 @@
 # logger
 
-[![Latest Stable Version](https://poser.pugx.org/appserver-io/logger/v/stable.png)](https://packagist.org/packages/appserver-io/logger) [![Total Downloads](https://poser.pugx.org/appserver-io/logger/downloads.png)](https://packagist.org/packages/appserver-io/logger) [![License](https://poser.pugx.org/appserver-io/logger/license.png)](https://packagist.org/packages/appserver-io/logger) [![Build Status](https://travis-ci.org/appserver-io/logger.png)](https://travis-ci.org/appserver-io/logger)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/appserver-io/logger/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/appserver-io/logger/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/appserver-io/logger/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/appserver-io/logger/?branch=master)
+[![Latest Stable Version](https://img.shields.io/packagist/v/appserver-io/logger.svg?style=flat-square)](https://packagist.org/packages/appserver-io/logger) 
+ [![Total Downloads](https://img.shields.io/packagist/dt/appserver-io/logger.svg?style=flat-square)](https://packagist.org/packages/appserver-io/logger)
+ [![License](https://img.shields.io/packagist/l/appserver-io/logger.svg?style=flat-square)](https://packagist.org/packages/appserver-io/logger)
+ [![Build Status](https://img.shields.io/travis/appserver-io/logger/master.svg?style=flat-square)](http://travis-ci.org/appserver-io/logger)
+ [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/appserver-io/logger/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/appserver-io/logger/?branch=master)
+ [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/appserver-io/logger/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/appserver-io/logger/?branch=master)
 
 ## Introduction
 
-logger provides fully thread-safe and PSR-3 compatible logger implementation.
+Logger provides fully thread-safe and PSR-3 compatible logger implementation.
 
-## Installation
+## Issues
 
-You don't have to install logger, as it'll be delivered with the latest appserver.io release. If you want to install it with
-your application only, you do this by add
+In order to bundle our efforts we would like to collect all issues regarding this package in [the main project repository's issue tracker](https://github.com/appserver-io/appserver/issues).
+Please reference the originating repository as the first element of the issue title e.g.:
+`[appserver-io/<ORIGINATING_REPO>] A issue I am having`
 
-```sh
-{
-    "require": {
-        "appserver-io/logger": "dev-master"
-    },
-}
-```
-
-to your ```composer.json``` and invoke ```composer update``` in your project.
-
-# External Links
+## External Links
 
 * Documentation at [appserver.io](http://docs.appserver.io)
