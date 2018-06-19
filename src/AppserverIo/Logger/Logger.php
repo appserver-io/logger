@@ -147,6 +147,110 @@ class Logger implements ThreadSafeLoggerInterface
     }
 
     /**
+     * Adds a log record at the DEBUG level.
+     *
+     * @param  string $message The log message
+     * @param  array  $context The log context
+     *
+     * @return boolean Whether the record has been processed
+     */
+    public function addDebug($message, array $context = array())
+    {
+        return $this->debug($message, $context);
+    }
+
+    /**
+     * Adds a log record at the INFO level.
+     *
+     * @param  string $message The log message
+     * @param  array  $context The log context
+     *
+     * @return boolean Whether the record has been processed
+     */
+    public function addInfo($message, array $context = array())
+    {
+        return $this->info($message, $context);
+    }
+
+    /**
+     * Adds a log record at the NOTICE level.
+     *
+     * @param  string $message The log message
+     * @param  array  $context The log context
+     *
+     * @return boolean Whether the record has been processed
+     */
+    public function addNotice($message, array $context = array())
+    {
+        return $this->notice($message, $context);
+    }
+
+    /**
+     * Adds a log record at the WARNING level.
+     *
+     * @param  string $message The log message
+     * @param  array  $context The log context
+     *
+     * @return boolean Whether the record has been processed
+     */
+    public function addWarning($message, array $context = array())
+    {
+        return $this->warning($message, $context);
+    }
+
+    /**
+     * Adds a log record at the ERROR level.
+     *
+     * @param  string $message The log message
+     * @param  array  $context The log context
+     *
+     * @return boolean Whether the record has been processed
+     */
+    public function addError($message, array $context = array())
+    {
+        return $this->error($message, $context);
+    }
+
+    /**
+     * Adds a log record at the CRITICAL level.
+     *
+     * @param  string $message The log message
+     * @param  array  $context The log context
+     *
+     * @return boolean Whether the record has been processed
+     */
+    public function addCritical($message, array $context = array())
+    {
+        return $this->critical($message, $context);
+    }
+
+    /**
+     * Adds a log record at the ALERT level.
+     *
+     * @param  string $message The log message
+     * @param  array  $context The log context
+     *
+     * @return boolean Whether the record has been processed
+     */
+    public function addAlert($message, array $context = array())
+    {
+        return $this->alert($message, $context);
+    }
+
+    /**
+     * Adds a log record at the EMERGENCY level.
+     *
+     * @param  string $message The log message
+     * @param  array  $context The log context
+     *
+     * @return boolean Whether the record has been processed
+     */
+    public function addEmergency($message, array $context = array())
+    {
+        return $this->emergency($message, $context);
+    }
+
+    /**
      * System is unusable.
      *
      * @param string $message The message to log

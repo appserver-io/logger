@@ -1,3 +1,13 @@
+# Version 2.0.0
+
+## Bugfixes
+
+* None
+
+## Features
+
+* Add add*() methods to Logger to improve compatiblity with monolog/monolog
+
 # Version 1.0.1
 
 ## Bugfixes
